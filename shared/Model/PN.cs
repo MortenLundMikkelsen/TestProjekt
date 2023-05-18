@@ -16,10 +16,11 @@ public class PN : Ordination {
     /// Returnerer true hvis givesDen er inden for ordinationens gyldighedsperiode og datoen huskes
     /// Returner false ellers og datoen givesDen ignoreres
     /// </summary>
-    public bool givDosis(Dato givesDen) {
-        if (givesDen.dato >= startDen && givesDen.dato <= slutDen)
+    public bool givDosis(DateTime givesDen) {
+
+        if (givesDen >= startDen && givesDen <= slutDen)
         {
-            dates.Add(givesDen);
+            dates.Add(new Dato(givesDen));
             return true;
         }
         else

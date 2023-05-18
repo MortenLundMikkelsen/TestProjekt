@@ -75,8 +75,7 @@ public class ServiceTest
     }
 
 
-    
-
+   
     [TestMethod]
     [ExpectedException(typeof(ArgumentNullException), "Patient ej fundet")]
     public void ExceptionOpretPN()
@@ -141,4 +140,26 @@ public class ServiceTest
 
         Console.WriteLine("Her kommer der ikke en exception. Testen fejler.");
     }
+
+
+    [TestMethod]
+    public void TestAnbefaletdosisPerDøgn()
+    {
+        Patient patient = service.GetPatienter().First();
+        Laegemiddel lm = service.GetLaegemidler().First();
+
+        Assert.AreEqual(lm.enhedPrKgPrDoegnNormal * patient.vaegt, service.GetAnbefaletDosisPerDøgn(patient.PatientId, lm.LaegemiddelId));
+    }
+
+    [TestMethod]
+    [ExpectedException(typeof(Exception), "Patient ej fundet")]
+    public void ExceptionAnbefaletDosis()
+    {
+        Patient patient = null;
+        Laegemiddel lm = service.GetLaegemidler().First();
+
+        service.GetAnbefaletDosisPerDøgn(patient?.PatientId ?? 0, lm.LaegemiddelId);
+
+    }
+
 }

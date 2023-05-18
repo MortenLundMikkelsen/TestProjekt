@@ -23,7 +23,7 @@ public abstract class Ordination {
     public int antalDage() {
 
         TimeSpan TidsRum = slutDen - startDen;
-        if(TidsRum.Days > 0)
+        if(TidsRum.Days >= 0)
         {
           return TidsRum.Days + 1;
         }
